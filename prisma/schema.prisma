@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String          @id @default(cuid())
+  name           String
+  email          String          @unique
+  password       String
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  savedLocations SavedLocation[]
+
+  @@map("users")
+}
+
+model SavedLocation {
+  id        String   @id @default(cuid())
+  cityName  String
+  country   String
+  lat       Float?
+  lon       Float?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, cityName])
+  @@map("saved_locations")
+}
+
+model WeatherRecord {
+  id          String   @id @default(cuid())
+  cityName    String
+  country     String   @default("")
+  temperature Float
+  feelsLike   Float    @default(0)
+  humidity    Int
+  description String
+  windSpeed   Float
+  icon        String   @default("")
+  pressure    Int      @default(0)
+  visibility  Int      @default(0)
+  sunrise     DateTime?
+  sunset      DateTime?
+  fetchedAt   DateTime @default(now())
+
+  @@index([cityName])
+  @@index([fetchedAt])
+  @@map("weather_records")
+}

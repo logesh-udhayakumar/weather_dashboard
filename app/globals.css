@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: 'Inter', system-ui, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-inter);
+    background-color: #020817;
+    color: #f8fafc;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(6, 182, 212, 0.4);
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism utility */
+  .glass {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #ffffff 0%, #22d3ee 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Shimmer loading effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.03) 25%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.03) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Hero background mesh */
+  .hero-mesh {
+    background-image:
+      radial-gradient(at 40% 20%, rgba(6, 182, 212, 0.08) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, rgba(59, 130, 246, 0.06) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, rgba(99, 102, 241, 0.06) 0px, transparent 50%),
+      radial-gradient(at 80% 50%, rgba(6, 182, 212, 0.04) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(16, 185, 129, 0.04) 0px, transparent 50%);
+  }
+
+  /* --- PREMIUM LIGHT THEME TRANSLATION LAYER --- */
+  html.light body {
+    background-color: #f8fafc;
+    color: #0f172a;
+    background-image:
+      radial-gradient(at 20% 0%, rgba(251, 146, 60, 0.04) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, rgba(45, 212, 191, 0.05) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, rgba(167, 139, 250, 0.04) 0px, transparent 50%),
+      radial-gradient(at 80% 100%, rgba(56, 189, 248, 0.04) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(244, 63, 94, 0.03) 0px, transparent 50%);
+  }
+  
+  /* Navbar & Backgrounds */
+  html.light .bg-navy-950 { background-color: transparent !important; }
+  html.light .bg-navy-900 { background-color: rgba(255, 255, 255, 0.8) !important; }
+  html.light .bg-navy-900\/80 { background-color: rgba(255, 255, 255, 0.8) !important; border-bottom: 1px solid rgba(0,0,0,0.05) !important; }
+  html.light .bg-navy-900\/95 { background-color: rgba(255, 255, 255, 0.95) !important; }
+  
+  /* Text Colors & Logo */
+  html.light .text-white { color: #0f172a !important; }
+  html.light .text-slate-400 { color: #64748b !important; }
+  html.light .text-slate-300 { color: #475569 !important; }
+  html.light .text-slate-500 { color: #94a3b8 !important; }
+  
+  /* Fix invisible gradients (WeatherBoard Logo) */
+  html.light .bg-clip-text.text-transparent {
+    background: none !important;
+    color: #0f172a !important;
+    -webkit-text-fill-color: #0f172a !important;
+  }
+  
+  /* Glass Cards (Premium Light Mode) */
+  html.light .bg-white\/3,
+  html.light .bg-white\/4,
+  html.light .bg-white\/5,
+  html.light .bg-white\/8,
+  html.light .bg-white\/10 { 
+    background-color: rgba(255, 255, 255, 0.7) !important; 
+  }
+  
+  /* Fix Gradients by overriding Tailwind Variables */
+  html.light .from-white\/8 { --tw-gradient-from: rgba(255, 255, 255, 0.95) !important; --tw-gradient-to: rgba(255, 255, 255, 0) !important; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; }
+  html.light .to-white\/3 { --tw-gradient-to: rgba(255, 255, 255, 0.6) !important; }
+  html.light .from-white\/\[0\.05\] { --tw-gradient-from: rgba(255, 255, 255, 0.9) !important; --tw-gradient-to: rgba(255, 255, 255, 0) !important; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; }
+  
+  /* Remove ugly blue smudges & fix shadows */
+  html.light .shadow-glass { box-shadow: 0 10px 40px -10px rgba(0,0,0,0.06), inset 0 0 0 1px rgba(255,255,255,0.6) !important; }
+  html.light .shadow-glow { box-shadow: 0 4px 14px rgba(0,0,0,0.05) !important; }
+  html.light .shadow-glow-lg { box-shadow: 0 10px 25px rgba(0,0,0,0.08) !important; }
+  html.light [class*="drop-shadow"] { filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05)) !important; }
+  html.light .bg-cyan-500\/20.blur-\[80px\] { background-color: rgba(255, 255, 255, 0.8) !important; blur: 40px !important; }
+  
+  /* Borders */
+  html.light .border-white\/8,
+  html.light .border-white\/10,
+  html.light .border-white\/20 { 
+    border-color: rgba(0, 0, 0, 0.06) !important; 
+  }
+  
+  /* Hover States */
+  html.light .hover\:bg-white\/7:hover,
+  html.light .hover\:bg-white\/8:hover,
+  html.light .hover\:bg-white\/10:hover { 
+    background-color: rgba(255, 255, 255, 0.95) !important; 
+  }
+  html.light .hover\:border-white\/20:hover { 
+    border-color: rgba(0, 0, 0, 0.15) !important; 
+  }
+  
+  /* Forms & Inputs */
+  html.light .placeholder-slate-500::placeholder { color: #94a3b8 !important; }
+  html.light input.bg-white\/5 {
+    background-color: rgba(255, 255, 255, 0.6) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02) !important;
+    color: #0f172a !important;
+  }
+  html.light input:focus {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-color: #06b6d4 !important;
+  }
+  
+  /* Highlights & active */
+  html.light .group:hover .group-hover\:text-cyan-100 { color: #0284c7 !important; }
+  html.light .text-cyan-300 { color: #0284c7 !important; }
+}
