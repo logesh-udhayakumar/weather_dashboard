@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { Cloud, ArrowLeft } from 'lucide-react'
 
+export const dynamic = 'force-dynamic'
+
 export default function NotFound() {
   return (
     <div className="min-h-screen hero-mesh flex items-center justify-center px-4 text-center">

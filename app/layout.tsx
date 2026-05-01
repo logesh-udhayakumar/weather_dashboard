@@ -31,7 +31,12 @@ export const metadata: Metadata = {
 import { ThemeProvider } from '@/components/ThemeProvider'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const session = await getServerSession(authOptions)
+  let session = null
+  try {
+    session = await getServerSession(authOptions)
+  } catch (error) {
+    console.error('Failed to get session in RootLayout:', error)
+  }
 
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
