@@ -1,4 +1,6 @@
 import Link from 'next/link'
+
+export const dynamic = 'force-dynamic'
 import { Cloud, ArrowRight, BarChart3, MapPin, Shield, Zap } from 'lucide-react'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/lib/authOptions'
