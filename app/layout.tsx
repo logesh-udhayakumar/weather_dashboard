@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/lib/authOptions'
 import SessionProvider from '@/components/SessionProvider'
 import { Toaster } from 'react-hot-toast'
 import './globals.css'
@@ -30,19 +28,12 @@ export const metadata: Metadata = {
 
 import { ThemeProvider } from '@/components/ThemeProvider'
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  let session = null
-  try {
-    session = await getServerSession(authOptions)
-  } catch (error) {
-    console.error('Failed to get session in RootLayout:', error)
-  }
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className="min-h-screen bg-navy-950 text-white antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <SessionProvider session={session}>
+          <SessionProvider session={null}>
             {children}
             <Toaster
               position="top-right"
