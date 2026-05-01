@@ -37,9 +37,9 @@ export async function GET(request: NextRequest) {
     // --- Cache in Redis for 10 minutes ---
     await redis.set(cacheKey, JSON.stringify(weather), { ex: 600 })
 
-    // --- Persist to database (fire and forget) ---
-    prisma.weatherRecord
-      .create({
+    // --- Persist to database ---
+    try {
+      await prisma.weatherRecord.create({
         data: {
           cityName: weather.city,
           country: weather.country,
@@ -55,7 +55,9 @@ export async function GET(request: NextRequest) {
           sunset: weather.sunset ? new Date(weather.sunset) : null,
         },
       })
-      .catch((err) => console.error('Failed to save weather record:', err))
+    } catch (err) {
+      console.error('Failed to save weather record:', err)
+    }
 
     return NextResponse.json({
       data: weather,
