@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
     const weather = await fetchCurrentWeather(city.trim())
 
     // --- Cache in Redis for 10 minutes ---
-    await redis.setex(cacheKey, 600, JSON.stringify(weather))
+    await redis.set(cacheKey, JSON.stringify(weather), { ex: 600 })
 
     // --- Persist to database (fire and forget) ---
     prisma.weatherRecord

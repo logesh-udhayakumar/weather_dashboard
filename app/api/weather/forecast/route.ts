@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
     const forecast = await fetchWeatherForecast(city.trim())
 
     // --- Cache in Redis for 30 minutes ---
-    await redis.setex(cacheKey, 1800, JSON.stringify(forecast))
+    await redis.set(cacheKey, JSON.stringify(forecast), { ex: 1800 })
 
     return NextResponse.json({
       data: forecast,

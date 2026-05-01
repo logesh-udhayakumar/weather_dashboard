@@ -14,7 +14,6 @@ function createRedisClient(): Redis {
     return {
       get: async () => null,
       set: async () => 'OK',
-      setex: async () => 'OK',
       del: async () => 0,
       expire: async () => 0,
     } as unknown as Redis
