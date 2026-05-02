@@ -9,8 +9,17 @@ const nextConfig = {
       },
     ],
   },
+  // serverComponentsExternalPackages covers RSC; webpack externals covers API Route Handlers
   experimental: {
     serverComponentsExternalPackages: ['@prisma/client', 'bcryptjs'],
+  },
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      // Prevent these native packages from being bundled by webpack.
+      // This is required for App Router Route Handlers (e.g. NextAuth route).
+      config.externals.push('@prisma/client', 'bcryptjs')
+    }
+    return config
   },
 }
 
